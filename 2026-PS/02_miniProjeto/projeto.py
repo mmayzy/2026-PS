@@ -1,3 +1,18 @@
+# ==================================
+# SISTEMA DE GEOPOLÍTICA
+# ==================================
+# Disciplina: Programação de Sistemas (PS)
+# Aula: 12 e 13 
+# Autor: Mayara, Yuri e Otávio.
+# Data: 2026.03.28
+# Repositório: https://github.com/mmayzy/2026-PS.git
+# ==================================
+#
+# DESCRIÇÃO:
+# Sistema de gepolitica que permite criar países, ve a história, acessar algumas informações, etc..
+#
+# ===================================
+
 import datetime # importa a data atual
 import os # imposta informações do sistema operacional para nao salvar em pastas erradas.
 DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))  # pega o caminho da pasta do projeto
