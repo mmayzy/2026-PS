@@ -15,12 +15,25 @@
 
 import datetime # importa a data atual
 import os # imposta informações do sistema operacional para nao salvar em pastas erradas.
+
 DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))  # pega o caminho da pasta do projeto
 
 # junta o caminho da pasta com o nome do arquivo
 ARQUIVO = os.path.join(DIRETORIO_ATUAL, "dados.txt")
+# cria o caminho para o arquivo de historico que o professor pediu
+HISTORICO = os.path.join(DIRETORIO_ATUAL, "historico.txt")
 
 SEPARADOR = "|"
+
+# função que registra tudo que fazemos no programa com data e hora
+def registrar_historico(acao):
+    data_hora = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    try:
+        # o 'a' serve para adicionar texto sem apagar o que ja estava no arquivo
+        with open(HISTORICO, "a", encoding="utf-8") as f:
+            f.write(f"[{data_hora}] {acao}\n")
+    except Exception as e:
+        print(f"Erro ao salvar historico: {e}")
 
 def carregar_dados():
     paises = []
@@ -61,6 +74,13 @@ def cadastrar(paises):
     try:
         
         nome = input("Nome do país: ").strip()
+
+        # verifica se o nome ja existe para nao cadastrar duplicado
+        for p in paises:
+            if p['nome'].lower() == nome.lower():
+                print(f"Erro: O país {nome} ja existe!")
+                return
+
         pop = int(input("População Total (em milhões): "))
         pib = float(input("PIB (em trilhões): "))
         ano_fund = int(input("Ano de Fundação: "))
@@ -75,6 +95,7 @@ def cadastrar(paises):
                 "fato_hist": fato_hist
             })
             print(f"{nome} adicionado ao mapa!")
+            registrar_historico(f"País cadastrado: {nome}") # salva no historico.txt
         else:
             print("Dados inválidos.")
     except ValueError:
@@ -94,7 +115,6 @@ def consultar_e_historia(paises):
     for i, p in enumerate(paises, 1):
         
         idade = ano_atual - p['ano_fund']
-        pib_per_capita = (p['pib'] * 10**6) / p['pop'] # Cálculo em milhões
         
         status = "Potência" if p["pib"] >= 2.0 else "Em desenvolvimento"
         
@@ -121,6 +141,7 @@ def exibir_detalhes_historicos(paises):
             print(f"- Fundação: Ano {p['ano_fund']} ({idade} anos atrás)")
             print(f"- Um pouco da história:: {p['fato_hist']}")
             print("=" * 30)
+            registrar_historico(f"Historia consultada: {p['nome']}") # salva no historico.txt
             achou = True
             break
     
@@ -139,6 +160,7 @@ def dissolucao(paises):
         if 0 <= indice < len(paises):
             removido = paises.pop(indice)
             print(f"A nação {removido['nome']} deixou de existir.")
+            registrar_historico(f"Nação removida: {removido['nome']}") # salva no historico.txt
         else:
             print("Índice inexistente.")
     except ValueError:
@@ -170,6 +192,7 @@ def menu():
             dissolucao(paises)
         elif opcao == "0":
             salvar_dados(paises)
+            registrar_historico("Sistema encerrado") # salva no historico.txt
             print("💾 Dados salvos com sucesso. Saindo...")
             break
         else:
