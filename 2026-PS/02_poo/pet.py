@@ -10,84 +10,147 @@
 '''
 
 class Pet:
-    def __init__(self, nome, especie, idade, raca, peso, vacinado=False):
+    '''
+    Esta classe representa um Pet em um sistema simples de hotel para pets.
+    Em vez e guardar os dados do pet em um dicionário solto, como fazíamos
+    na programação estruturada, agora agruupamos os
+    dados e comportamentos de uma única classe.
+    '''
+
+    def __init__(self, nome, especie, idade, raca, peso, nome_dono, vacinado):
+        '''
+        MÉTODO CONSTRUTOR
+        atributos adcionados: raca, peso, nome_dono e vacinado 
+        conforme solicitado na Atividade 1.
+        '''
         self.nome = nome
         self.especie = especie
         self.idade = idade
-        # atributos adcioandos
         self.raca = raca
         self.peso = peso
+        self.nome_dono = nome_dono
         self.vacinado = vacinado
-        self.hospedado = False
+        self.hospedado = False # inicia como falso por padrão
 
     def exibir_dados(self):
-        print(f"\nFICHA DO PET: {self.nome}")
-        print(f"Espécie: {self.especie} | Raça: {self.raca}")
-        print(f"Idade: {self.idade} anos | Peso: {self.peso}kg")
-        print(f"Vacinado: {'Sim' if self.vacinado else 'Não'}")
+        '''
+        MÉTODO EXIBIR DADOS
+        atualizado para exibir os novos atributos (Raça, Peso, Dono).
+        '''
+        print("\n" + "="*30)
+        print(f"FICHA TÉCNICA: {self.nome}")
+        print("=" * 30)
+        print(f"Espécie: {self.especie}")
+        print(f"Raça: {self.raca}")
+        print(f"Idade: {self.idade} anos")
+        print(f"Status: {'Hospedado' if self.hospedado else 'Disponível'}")
+        print("="*30)
 
     def registrar_entrada(self):
-        # validação, verifica se já está hospedado
+        '''
+        MÉTODO REGISTRAR ENTRADA
+        verifica se o pet já está no hotel antes de mudar o status.
+        '''
         if self.hospedado:
-            print(f"Atenção: {self.nome} JÁ está hospedado!")
+            print(f"=== AVISO: {self.nome} JÁ se encontra hospedado. ===")
         else:
             self.hospedado = True
-            print(f"Sucesso: Entrada de {self.nome} registrada.")
+            print(f"=== SUCESSO: Check-in de {self.nome} realizado! ===")
 
     def registrar_saida(self):
-        # validação: verifica se está no hotel para poder sair
+        '''
+        MÉTODO REGISTRAR SAÍDA
+        verifica se o pet está no hotel para permitir o check-out.
+        '''
         if not self.hospedado:
-            print(f"Erro: {self.nome} NÃO está no hotel para realizar saída.")
+            print(f"=== AVISO: {self.nome} não está hospedado. ===")
         else:
             self.hospedado = False
-            print(f"Sucesso: Saída de {self.nome} registrada.")
+            print(f"=== SUCESSO: Check-out de {self.nome} realizado! ===")
 
     def calcular_diaria(self):
-        # método que calcula valor baseado na idade
-        valor = 50.00 if self.idade <= 3 else 75.00
-        return valor
+        '''
+        MÉTODO CALCULAR DIÁRIA
+        define valores baseados na faixa etária do pet.
+        '''
+        if self.idade <= 3:
+            return 50.00
+        elif 4 <= self.idade <= 10:
+            return 60.00
+        else:
+            return 75.00
 
     def verificar_vacinacao(self):
-        # método que checa status de saúde
+        '''
+        MÉTODO VERIFICAR VACINAÇÃO
+        retorna msgs baseadas no atributo self.vacinado.
+        '''
         if self.vacinado:
-            print(f"Saúde: {self.nome} está com as vacinas em dia.")
+            print(f"INFO: Vacinação de {self.nome} está em dia.")
         else:
-            print(f"Alerta: {self.nome} necessita de vacinação!")
+            print(f"ALERTA: {self.nome} está com vacinação pendente!")
 
     def atualizar_peso(self, novo_peso):
-        # método para atualizar dados
-        print(f"Atualizando peso de {self.nome}: {self.peso}kg -> {novo_peso}kg")
+        '''
+        MÉTODO ATUALIZAR PESO
+        guarda um novo valor e substitui o atributo antigo.
+        '''
         self.peso = novo_peso
+        print(f"INFO: Peso de {self.nome} atualizado para {self.peso}kg.")
 
     def emitir_resumo(self):
-        # metodo que consolida as informações
-        print("=" * 35)
-        print(f"RESUMO FINANCEIRO - {self.nome.upper()}")
-        print(f"Valor da diária: R$ {self.calcular_diaria():.2f}")
-        print(f"Hospedado no momento: {'Sim' if self.hospedado else 'Não'}")
-        print("=" * 35)
+        '''
+        MÉTODO EMITIR RESUMO
+        gera um relatório completo chamando o método calcular_diaria().
+        '''
+        valor_diaria = self.calcular_diaria()
+        print(f"\n==== RESUMO GERAL DO PET ====")
+        print(f"Pet: {self.nome} ({self.raca})")
+        print(f"Idade: {self.idade} anos")
+        print(f"Dono: {self.nome_dono}")
+        print(f"Peso Atual: {self.peso}kg")
+        print(f"Vacinação: {'OK' if self.vacinado else 'PENDENTE'}")
+        print(f"Hospedagem: {'Ativa' if self.hospedado else 'Inativa'}")
+        print(f"VALOR DA DIÁRIA: R$ {valor_diaria:.2f}")
+        print("=" * 30)
 
-# ==========================================
-# TESTES DA ATIVIDADE
-# ==========================================
+# ==============================================================================
+# TESTES DA CLASSE
+# ==============================================================================
 
-# 1. 3 objetos diferentes
-pet1 = Pet("Rex", "Cachorro", 5, "Golden Retriever", 32.0, True)
-pet2 = Pet("Mimi", "Gato", 2, "Siamês", 4.5, False)
-pet3 = Pet("Thor", "Cachorro", 8, "Bulldog", 25.0, True)
+# Criando os objetos conforme o exemplo
+pet1 = Pet("Rex", "Cachorro", 5, "Labrador", 22.5, "Maria", True)
+pet2 = Pet("Mimi", "Gato", 2, "Siamês", 4.2, "João", True)
+pet3 = Pet("Thor", "Cachorro", 11, "Vira-lata", 18.0, "Ana", False)
 
-# 2. métodos no pet1
+#demonstração Pet 1
 pet1.exibir_dados()
-pet1.registrar_entrada() # Primeira entrada
-pet1.registrar_entrada() # Teste de validação (já hospedado)
+pet1.registrar_entrada()
+pet1.verificar_vacinacao()
+# print pois o calcular_diaria apenas 'retorna' o valor
+print("Diária:", pet1.calcular_diaria()) 
+pet1.atualizar_peso(23.0)
+pet1.emitir_resumo()
 
-# 3. métodos no pet2
-print("\n==== TESTE PET 2 ====")
-pet2.verificar_vacinacao()
-pet2.atualizar_peso(5.2)
-pet2.emitir_resumo()
+# Demonstração Pet 3
+pet3.exibir_dados()
+pet3.verificar_vacinacao()
+pet3.registrar_entrada()
+pet3.registrar_saida()
+pet3.emitir_resumo()
 
-# 4. métodos no pet3
-print("\n==== TESTE PET 3 ====")
-pet3.registrar_saida() # Teste de validação (tentando sair sem entrar)
-print(f"Valor da diária: R$ {pet3.calcular_diaria()}")
+# ==============================================================================
+# TESTES ADICIONAIS
+# ==============================================================================
+
+
+pet4 = Pet("Ozzy", "Gato", 1, "Preto", 3.5, "Carol", False)
+pet5 = Pet("Maya", "Cachorro", 3, "Golden Retriever", 15.0, "Beatriz", True)
+
+print("\n=== TESTES ADICIONAIS ===")
+
+pet4.registrar_entrada()
+pet4.emitir_resumo()
+
+pet5.verificar_vacinacao()
+pet5.emitir_resumo()
