@@ -70,12 +70,10 @@ ARQUIVO_TXT = "pets.txt"
 def salvar_todos():
     # salvar em binário (pickle)
     # escolhi o pickle pois ele preserva o objeto inteiro (estados e tipos)
-    # O modo 'wb' garante que o arquivo seja sobrescrito, mantendo um único arquivo atualizado
     with open(ARQUIVO_BIN, "wb") as f:
         pickle.dump(lista_pets, f)
     
     # Salvar em TXT 
-    # O modo 'w' limpa o arquivo antigo e grava a lista inteira do zero
     with open(ARQUIVO_TXT, "w", encoding="utf-8") as f:
         for p in lista_pets:
             linha = f"{p.nome};{p.especie};{p.idade};{p.raca};{p.peso};{p.nome_dono};{p.vacinado};{p.hospedado}\n"
@@ -84,13 +82,16 @@ def salvar_todos():
 
 def carregar_dados():
     global lista_pets
-    if os.path.exists(ARQUIVO_BIN):
-        with open(ARQUIVO_BIN, "rb") as f:
-            try:
+    try:
+        if os.path.exists(ARQUIVO_BIN):
+            with open(ARQUIVO_BIN, "rb") as f:
                 lista_pets = pickle.load(f)
                 print(f"✅ {len(lista_pets)} registros carregados.")
-            except EOFError:
-                lista_pets = []
+        else:
+            print("ℹ️ Nenhum arquivo encontrado. Iniciando sistema vazio.")
+    except (FileNotFoundError, EOFError, pickle.UnpicklingError):
+        print("⚠️ Erro ao carregar ou arquivo inexistente. Iniciando lista vazia.")
+        lista_pets = []
 
 # ==============================================================================
 # 3. FUNÇÕES DE BUSCA E RELATÓRIOS
@@ -98,6 +99,8 @@ def carregar_dados():
 def buscar_pet():
     nome_busca = input("Digite o nome (ou parte dele): ").lower()
     encontrados = [p for p in lista_pets if nome_busca in p.nome.lower()]
+    if not encontrados:
+        print("❌ Nenhum pet encontrado com esse nome.")
     return encontrados
 
 def relatorio_hospedados():
@@ -124,24 +127,29 @@ def menu():
         print("3. Check-in/Out")
         print("4. Atualizar Peso")
         print("5. Buscar Pet")
-        print("6.Resumo Individual")
+        print("6. Resumo Individual")
         print("7. Relatório Hospedados")
         print("0. Sair")
         
         op = input("Escolha: ")
 
         if op == "1":
-            nome = input("Nome: ")
-            esp = input("Espécie: ")
-            idade = int(input("Idade: "))
-            raca = input("Raça: ")
-            peso = float(input("Peso: "))
-            dono = input("Dono: ")
-            vac = input("Vacinado? (s/n): ").lower() == 's'
-            lista_pets.append(Pet(nome, esp, idade, raca, peso, dono, vac))
-            salvar_todos()
+            try:
+                nome = input("Nome: ")
+                esp = input("Espécie: ")
+                idade = int(input("Idade: "))
+                raca = input("Raça: ")
+                peso = float(input("Peso: "))
+                dono = input("Dono: ")
+                vac = input("Vacinado? (s/n): ").lower() == 's'
+                lista_pets.append(Pet(nome, esp, idade, raca, peso, dono, vac))
+                salvar_todos()
+            except ValueError:
+                print("❌ Erro: Idade e Peso precisam ser números.")
 
         elif op == "2":
+            if not lista_pets:
+                print("Lista vazia.")
             for p in lista_pets: p.exibir_dados()
 
         elif op == "3":
@@ -149,16 +157,22 @@ def menu():
             if pets:
                 p = pets[0] # Pega o primeiro que encontrar
                 acao = input(f"1. Check-in ou 2. Check-out {p.nome}? ")
-                p.registrar_entrada() if acao == "1" else p.registrar_saida()
+                # Usando os métodos da classe em vez de alterar atributo direto
+                if acao == "1":
+                    p.registrar_entrada()
+                elif acao == "2":
+                    p.registrar_saida()
                 salvar_todos()
-            else: print("Pet não encontrado.")
 
         elif op == "4":
             pets = buscar_pet()
             if pets:
-                novo_p = float(input(f"Novo peso para {pets[0].nome}: "))
-                pets[0].atualizar_peso(novo_p)
-                salvar_todos()
+                try:
+                    novo_p = float(input(f"Novo peso para {pets[0].nome}: "))
+                    pets[0].atualizar_peso(novo_p)
+                    salvar_todos()
+                except ValueError:
+                    print("❌ Valor de peso inválido.")
 
         elif op == "5":
             for p in buscar_pet(): p.exibir_dados()
@@ -171,7 +185,8 @@ def menu():
             relatorio_hospedados()
 
         elif op == "0":
-            salvar_todos()
+            print("Salvando dados e encerrando...")
+            salvar_todos() # Garante o salvamento antes de fechar
             break
 
 if __name__ == "__main__":
