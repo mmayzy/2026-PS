@@ -1,0 +1,38 @@
+[
+    {
+        "nome": "Ozzy",
+        "especie": "Morcego",
+        "idade": 1,
+        "peso": 1.0,
+        "nome_dono": "Drácula",
+        "vacinado": false,
+        "hospedado": false,
+        "comportamento": "Não dorme à noite, perigoso, morde as pessoas",
+        "restricoes": "não pode sair no sol",
+        "valorDiaria": 80.0
+    },
+    {
+        "nome": "Destruídora de Mundos",
+        "especie": "Lagarta",
+        "idade": 1,
+        "peso": 0.5,
+        "nome_dono": "Pessoa",
+        "vacinado": false,
+        "hospedado": true,
+        "comportamento": "Altamente agressiva",
+        "restricoes": "Alimentar apenas com folhas",
+        "valorDiaria": 80.0
+    },
+    {
+        "nome": "Jerry",
+        "especie": "Cachorro",
+        "idade": 5,
+        "peso": 10.0,
+        "nome_dono": "Pessoa 2",
+        "vacinado": true,
+        "hospedado": false,
+        "comportamento": "Educado",
+        "restricoes": "Nenhuma",
+        "valorDiaria": 60.0
+    }
+]
