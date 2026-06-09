@@ -18,11 +18,11 @@ public class CardapioRestaurante {
 
         while (continuarComprando) {
             System.out.println("\n=====================================================");
-            System.out.println("     CARDÁPIO ELETRÔNICO - CAFÉ CREPÚSCULO");
+            System.out.println("         CAFÉ DO DRÁCULA - CARDÁPIO DA NOITE");
             System.out.println("=====================================================");
-            System.out.println("1 - Cafés");
-            System.out.println("2 - Outras bebidas");
-            System.out.println("3 - Bolos");
+            System.out.println("1 - Cafés Tradicionais");
+            System.out.println("2 - Banco de Sangue & Elixires");
+            System.out.println("3 - Confeitaria das Trevas");
             System.out.println("4 - CONFERIR CARRINHO / FINALIZAR");
             System.out.println("=====================================================");
 
@@ -35,7 +35,7 @@ public class CardapioRestaurante {
 
             switch (categoria) {
                 case 1: // SUBMENU: CAFÉS
-                    System.out.println("\n--- CAFÉS ---");
+                    System.out.println("\n--- CAFÉS TRADICIONAIS ---");
                     System.out.println("1 - Espresso .......... R$ 6,00");
                     System.out.println("2 - Capuccino ......... R$ 9,00");
                     System.out.println("3 - Latte ............. R$ 10,00");
@@ -52,39 +52,39 @@ public class CardapioRestaurante {
                     }
                     break;
 
-                case 2: // SUBMENU: BEBIDAS
-                    System.out.println("\n--- BEBIDAS E SUCOS ---");
-                    System.out.println("1 - Suco de Laranja ... R$ 8,00");
-                    System.out.println("2 - Chá Gelado ........ R$ 7,00");
-                    System.out.println("3 - Limonada .......... R$ 9,00");
-                    System.out.println("4 - Chá Quente ........ R$ 7,00");
-                    System.out.print("Escolha a bebida: ");
+                case 2: // SUBMENU: BEBIDAS (Mais sangues adicionados)
+                    System.out.println("\n--- BANCO DE SANGUE & ELIXIRES ---");
+                    System.out.println("1 - Sangue Tipo O- (Universal) .... R$ 15,00");
+                    System.out.println("2 - Sangue Tipo A+ ................ R$ 12,50");
+                    System.out.println("3 - Sangue Tipo B- ................ R$ 14,00");
+                    System.out.println("4 - Ácido Sulfúrico Cítrico ....... R$ 9,50");
+                    System.out.println("5 - Infusão de Arsênio (Quente) ... R$ 8,50");
+                    System.out.print("Escolha seu tipo sanguíneo ou elixir: ");
                     int opcaoBebida = entrada.nextInt();
 
                     switch (opcaoBebida) {
-                        case 1: itemEscolhido = "Suco de Laranja"; precoUnitario = 8.00; opcaoValida = true; break;
-                        case 2: itemEscolhido = "Chá Gelado"; precoUnitario = 7.00; opcaoValida = true; break;
-                        case 3: itemEscolhido = "Limonada"; precoUnitario = 9.00; opcaoValida = true; break;
-                        case 4: itemEscolhido = "Chá Quente"; precoUnitario = 7.00; opcaoValida = true; break;
+                        case 1: itemEscolhido = "Sangue Tipo O- (Universal)"; precoUnitario = 15.00; opcaoValida = true; break;
+                        case 2: itemEscolhido = "Sangue Tipo A+"; precoUnitario = 12.50; opcaoValida = true; break;
+                        case 3: itemEscolhido = "Sangue Tipo B-"; precoUnitario = 14.00; opcaoValida = true; break;
+                        case 4: itemEscolhido = "Ácido Sulfúrico Cítrico"; precoUnitario = 9.50; opcaoValida = true; break;
+                        case 5: itemEscolhido = "Infusão de Arsênio"; precoUnitario = 8.50; opcaoValida = true; break;
                         default: System.out.println("[Erro] Opção de bebida inválida."); break;
                     }
                     break;
 
-                case 3: // SUBMENU: BOLOS
-                    System.out.println("\n--- BOLOS ---");
-                    System.out.println("1 - Bolo de Chocolate . R$ 8,50");
-                    System.out.println("2 - Bolo de Morango ... R$ 7,50");
-                    System.out.println("3 - Bolo de Abacaxi ... R$ 9,00");
-                    System.out.println("4 - Torta de Amora .... R$ 8,00");
-                    System.out.print("Escolha o sabor: ");
+                case 3: // SUBMENU: BOLOS (Cianureto removido)
+                    System.out.println("\n--- CONFEITARIA DAS TREVAS ---");
+                    System.out.println("1 - Torta de Morcego das Cavernas .. R$ 14,00");
+                    System.out.println("2 - Bolo de Múmia do Século XIV .... R$ 16,50");
+                    System.out.println("3 - Pavê de Cinzas de Vampiro ...... R$ 11,00");
+                    System.out.print("Escolha sua relíquia açucarada: ");
                     int opcaoBolo = entrada.nextInt();
 
                     switch (opcaoBolo) {
-                        case 1: itemEscolhido = "Bolo de Chocolate"; precoUnitario = 8.50; opcaoValida = true; break;
-                        case 2: itemEscolhido = "Bolo de Morango"; precoUnitario = 7.50; opcaoValida = true; break;
-                        case 3: itemEscolhido = "Bolo de Abacaxi"; precoUnitario = 9.00; opcaoValida = true; break;
-                        case 4: itemEscolhido = "Torta de Amora"; precoUnitario = 8.00; opcaoValida = true; break;
-                        default: System.out.println("[Erro] Sabor de bolo inválido."); break;
+                        case 1: itemEscolhido = "Torta de Morcego"; precoUnitario = 14.00; opcaoValida = true; break;
+                        case 2: itemEscolhido = "Bolo de Múmia Séc. XIV"; precoUnitario = 16.50; opcaoValida = true; break;
+                        case 3: itemEscolhido = "Pavê de Cinzas de Vampiro"; precoUnitario = 11.00; opcaoValida = true; break;
+                        default: System.out.println("[Erro] Opção de doce inválida."); break;
                     }
                     break;
 
@@ -92,7 +92,6 @@ public class CardapioRestaurante {
                     if (itensCarrinho.isEmpty()) {
                         System.out.println("\n Seu carrinho está vazio! Adicione itens antes de avançar.");
                     } else {
-                        // Menu intermediário de gerenciamento de carrinho
                         boolean noMenuRevisao = true;
                         while (noMenuRevisao) {
                             double subtotalGeral = 0.0;
@@ -100,7 +99,6 @@ public class CardapioRestaurante {
                             System.out.println("             CARRINHO DE COMPRAS ATUAL               ");
                             System.out.println("=====================================================");
                             
-                            // Mostra os itens numerados de 1 até o tamanho final da lista
                             for (int i = 0; i < itensCarrinho.size(); i++) {
                                 double valorItem = precosCarrinho.get(i) * qtdsCarrinho.get(i);
                                 subtotalGeral += valorItem;
@@ -118,14 +116,13 @@ public class CardapioRestaurante {
                             int opcaoRevisao = entrada.nextInt();
 
                             if (opcaoRevisao == 1) {
-                                noMenuRevisao = false; // Sai desse menu e volta pro while do cardápio principal
+                                noMenuRevisao = false; 
                             } else if (opcaoRevisao == 2) {
                                 System.out.print("Digite o número do item que deseja remover: ");
                                 int indiceRemover = entrada.nextInt();
                                 
-                                // Valida se o número do item digitado existe na lista
                                 if (indiceRemover >= 1 && indiceRemover <= itensCarrinho.size()) {
-                                    int indexReal = indiceRemover - 1; // Ajusta porque listas começam em 0
+                                    int indexReal = indiceRemover - 1; 
                                     System.out.printf("✔ %s foi removido do seu carrinho.%n", itensCarrinho.get(indexReal));
                                     itensCarrinho.remove(indexReal);
                                     qtdsCarrinho.remove(indexReal);
@@ -140,7 +137,7 @@ public class CardapioRestaurante {
                                 }
                             } else if (opcaoRevisao == 3) {
                                 noMenuRevisao = false;
-                                continuarComprando = false; // Quebra o loop principal para ir ao pagamento definitivo
+                                continuarComprando = false; 
                             } else {
                                 System.out.println("[Erro] Opção inválida.");
                             }
@@ -153,7 +150,7 @@ public class CardapioRestaurante {
                     break;
             }
 
-            // Adiciona itens selecionados nas listas correspondentes
+            // LÓGICA DE ADICIONAR OU ACUMULAR NO CARRINHO
             if (opcaoValida) {
                 System.out.printf("Você selecionou: %s (R$ %.2f)%n", itemEscolhido, precoUnitario);
                 System.out.print("Digite a quantidade desejada: ");
@@ -162,10 +159,21 @@ public class CardapioRestaurante {
                 if (quantidade <= 0) {
                     System.out.println("[Erro] Quantidade inválida! Item descartado.");
                 } else {
-                    itensCarrinho.add(itemEscolhido);
-                    qtdsCarrinho.add(quantidade);
-                    precosCarrinho.add(precoUnitario);
-                    System.out.println("✔ Item adicionado ao carrinho!");
+                    // Verifica se o item já existe no carrinho para apenas somar a quantidade
+                    int indexExistente = itensCarrinho.indexOf(itemEscolhido);
+                    
+                    if (indexExistente != -1) {
+                        // Se já existir, pega a quantidade antiga e soma com a nova
+                        int qtdAntiga = qtdsCarrinho.get(indexExistente);
+                        qtdsCarrinho.set(indexExistente, qtdAntiga + quantidade);
+                        System.out.println("✔ Quantidade atualizada no carrinho!");
+                    } else {
+                        // Se for um item novo, adiciona normalmente nas listas
+                        itensCarrinho.add(itemEscolhido);
+                        qtdsCarrinho.add(quantidade);
+                        precosCarrinho.add(precoUnitario);
+                        System.out.println("✔ Item adicionado ao carrinho!");
+                    }
                 }
             }
         }
@@ -173,7 +181,7 @@ public class CardapioRestaurante {
         // --- CALCULO FINAL E EMISSÃO DA NOTA ---
         double valorTotalGeral = 0.0;
         System.out.println("\n=====================================================");
-        System.out.println("          RESUMO DO PEDIDO - CREPÚSCULO     ");
+        System.out.println("            RESUMO DO PEDIDO - CAFÉ DO DRÁCULA       ");
         System.out.println("=====================================================");
         for (int i = 0; i < itensCarrinho.size(); i++) {
             double valorItem = precosCarrinho.get(i) * qtdsCarrinho.get(i);
@@ -181,7 +189,7 @@ public class CardapioRestaurante {
             System.out.printf("- %s x%d: R$ %.2f%n", itensCarrinho.get(i), qtdsCarrinho.get(i), valorItem);
         }
         System.out.println("-----------------------------------------------------");
-        System.out.printf("VALOR TOTAL: R$ %.2f%n", valorTotalGeral);
+        System.out.printf("VALOR TOTAL DO BANQUETE: R$ %.2f%n", valorTotalGeral);
         System.out.println("=====================================================");
 
         // --- SISTEMA DE FORMA DE PAGAMENTO ---
@@ -199,7 +207,6 @@ public class CardapioRestaurante {
             }
         }
 
-        // --- VALOR PAGO EM CASO DE DINHEIRO (TROCO) ---
         double valorPago = valorTotalGeral;
         double troco = 0.0;
         String textoPagamento = "";
@@ -225,7 +232,7 @@ public class CardapioRestaurante {
 
         // --- IMPRESSÃO COMPLETA DO RECIBO ---
         System.out.println("\n=====================================================");
-        System.out.println("             PEDIDO CONFIRMADO COM SUCESSO!          ");
+        System.out.println("             CONTA FECHADA COM SUCESSO!              ");
         System.out.println("=====================================================");
         System.out.printf("Forma de Pagamento:  %s%n", textoPagamento);
         System.out.printf("VALOR TOTAL:         R$ %.2f%n", valorTotalGeral);
@@ -236,8 +243,8 @@ public class CardapioRestaurante {
         System.out.println("-----------------------------------------------------");
         System.out.printf("SEU NÚMERO DE PEDIDO É: #%03d%n", numeroPedido);
         System.out.println("-----------------------------------------------------");
-        System.out.println(" Agradecemos a preferência!");
-        System.out.println(" Por favor, aguarde a chamada do seu número no painel.");
+        System.out.println(" Agradecemos a preferência mortal!");
+        System.out.println(" Por favor, aguarde o seu banquete ser preparado.");
         System.out.println("=====================================================");
 
         entrada.close();
