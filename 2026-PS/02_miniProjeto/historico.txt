@@ -1,2 +1,16 @@
 [28/03/2026 13:22:09] País cadastrado: brasil
 [28/03/2026 13:22:11] Sistema encerrado
+[31/03/2026 14:24:13] País cadastrado: Paraguai
+[31/03/2026 14:24:47] Historia consultada: Paraguai
+[31/03/2026 14:25:38] Nação removida: Paraguai
+[31/03/2026 14:25:59] Sistema encerrado
+[31/03/2026 14:30:30] País cadastrado: Gpt cod
+[31/03/2026 14:32:01] País cadastrado: Paraguai
+[31/03/2026 14:32:03] Sistema encerrado
+[07/04/2026 13:31:20] País cadastrado: brasil
+[07/04/2026 13:31:37] Historia consultada: brasil
+[07/04/2026 13:31:50] Nação removida: brasil
+[07/04/2026 13:32:09] País cadastrado: brasil
+[07/04/2026 13:32:21] Sistema encerrado
+[07/04/2026 13:33:30] Sistema encerrado
+[07/04/2026 13:33:53] Sistema encerrado
