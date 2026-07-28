@@ -56,4 +56,29 @@ public class Produto {
         }
     }
 
+    // Adiciona produtos ao estoque
+    public void adicionarEstoque(int quantidade) {
+        if (quantidade > 0) {
+            this.quantidade += quantidade;
+        } else {
+            System.out.println("Erro: a quantidade deve ser maior que zero.");
+        }
+    }
+
+    // Remove produtos do estoque
+    public boolean removerEstoque(int quantidade) {
+        if (quantidade > 0 && quantidade <= this.quantidade) {
+            this.quantidade -= quantidade;
+            return true;
+        } else {
+            System.out.println("Erro: estoque insuficiente.");
+            return false;
+        }
+    }
+
+    // Calcula o valor total em estoque
+    public double calcularValorEmEstoque() {
+        return preco * quantidade;
+    }
+
 }
