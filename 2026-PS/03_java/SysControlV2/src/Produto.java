@@ -9,9 +9,51 @@ public class Produto {
     // Construtor
     public Produto(int codigo, String nome, double preco, int quantidade) {
         this.codigo = codigo;
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidade = quantidade;
+        setNome(nome);
+        setPreco(preco);
+        setQuantidade(quantidade);
+    }
+
+    // Getters
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    // Setters com validação
+    public void setNome(String nome) {
+        if (nome != null && !nome.trim().isEmpty()) {
+            this.nome = nome;
+        } else {
+            System.out.println("Erro: o nome não pode ser vazio.");
+        }
+    }
+
+    public void setPreco(double preco) {
+        if (preco >= 0) {
+            this.preco = preco;
+        } else {
+            System.out.println("Erro: o preço não pode ser negativo.");
+        }
+    }
+
+    public void setQuantidade(int quantidade) {
+        if (quantidade >= 0) {
+            this.quantidade = quantidade;
+        } else {
+            System.out.println("Erro: a quantidade não pode ser negativa.");
+        }
     }
 
 }
