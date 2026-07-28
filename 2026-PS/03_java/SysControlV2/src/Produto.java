@@ -6,12 +6,20 @@ public class Produto {
     private double preco;
     private int quantidade;
 
-    // Construtor
+    // Construtor principal
     public Produto(int codigo, String nome, double preco, int quantidade) {
         this.codigo = codigo;
         setNome(nome);
         setPreco(preco);
         setQuantidade(quantidade);
+    }
+
+    // Construtor alternativo (Desafio 1)
+    public Produto(String nome, double preco) {
+        this.codigo = 0;
+        setNome(nome);
+        setPreco(preco);
+        setQuantidade(0);
     }
 
     // Getters
@@ -56,7 +64,7 @@ public class Produto {
         }
     }
 
-    // Adiciona produtos ao estoque
+    // Métodos de comportamento
     public void adicionarEstoque(int quantidade) {
         if (quantidade > 0) {
             this.quantidade += quantidade;
@@ -65,7 +73,6 @@ public class Produto {
         }
     }
 
-    // Remove produtos do estoque
     public boolean removerEstoque(int quantidade) {
         if (quantidade > 0 && quantidade <= this.quantidade) {
             this.quantidade -= quantidade;
@@ -76,9 +83,16 @@ public class Produto {
         }
     }
 
-    // Calcula o valor total em estoque
     public double calcularValorEmEstoque() {
         return preco * quantidade;
+    }
+
+    // Método resumo (Desafio 2)
+    public String resumo() {
+        return "Código: " + codigo +
+               " | Nome: " + nome +
+               " | Preço: R$ " + preco +
+               " | Quantidade: " + quantidade;
     }
 
 }
