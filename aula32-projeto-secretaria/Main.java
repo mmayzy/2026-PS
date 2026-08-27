@@ -19,43 +19,56 @@ public class Main {
         while (true) {
 
             System.out.println("=========================================");
-            System.out.println("       SECRETARIA DA MAYARA");
+            System.out.println("       SECRETARIA DO CAMPUS - por Mayara");
             System.out.println("=========================================");
             System.out.println("[1] Cadastrar aluno");
             System.out.println("[2] Listar alunos");
-            System.out.println("[3] Buscar aluno");
+            System.out.println("[3] Buscar aluno por matricula");
             System.out.println("[4] Atualizar aluno");
             System.out.println("[5] Remover aluno");
-            System.out.println("[6] Relatório");
+            System.out.println("[6] Relatorio");
+            System.out.println("[7] Buscar aluno por nome");
             System.out.println("[0] Sair");
             System.out.print("Sua escolha: ");
 
             String opcao = teclado.nextLine().trim();
 
             if (opcao.equals("0")) {
-                System.out.println("Secretaria fechada. Ate a proxima!");
+
+                System.out.println("Secretaria da Mayara fechada. Ate a proxima!");
                 break;
 
             } else if (opcao.equals("1")) {
+
                 cadastrar(lista, teclado);
 
             } else if (opcao.equals("2")) {
+
                 listar(lista);
 
             } else if (opcao.equals("3")) {
+
                 buscarAluno(lista, teclado);
 
             } else if (opcao.equals("4")) {
+
                 atualizar(lista, teclado);
 
             } else if (opcao.equals("5")) {
+
                 remover(lista, teclado);
 
             } else if (opcao.equals("6")) {
+
                 relatorio(lista);
 
+            } else if (opcao.equals("7")) {
+
+                buscarPorNomeMenu(lista, teclado);
+
             } else {
-                System.out.println("Opcao invalida!");
+
+                System.out.println("Opcao invalida! Vale de 0 a 7.");
             }
         }
 
@@ -68,6 +81,7 @@ public class Main {
         String nome;
 
         while (true) {
+
             System.out.print("Nome: ");
             nome = teclado.nextLine().trim();
 
@@ -81,16 +95,20 @@ public class Main {
         String matricula;
 
         while (true) {
+
             System.out.print("Matricula: ");
             matricula = teclado.nextLine().trim();
 
             if (matricula.isEmpty()) {
+
                 System.out.println("A matricula nao pode ficar vazia!");
 
             } else if (buscarPorMatricula(lista, matricula) != null) {
+
                 System.out.println("Essa matricula ja esta cadastrada!");
 
             } else {
+
                 break;
             }
         }
@@ -98,6 +116,7 @@ public class Main {
         String curso;
 
         while (true) {
+
             System.out.print("Curso: ");
             curso = teclado.nextLine().trim();
 
@@ -111,6 +130,7 @@ public class Main {
         String email;
 
         while (true) {
+
             System.out.print("Email: ");
             email = teclado.nextLine().trim();
 
@@ -122,32 +142,36 @@ public class Main {
         }
 
         Aluno novo = new Aluno(nome, matricula, curso, email);
+
         lista.add(novo);
 
-        System.out.println("Ficha de " + novo.getNome() + " arquivada!");
+        System.out.println("Ficha de " + novo.getNome() + " arquivada com sucesso!");
     }
 
     // LISTAR
     static void listar(ArrayList<Aluno> lista) {
 
         if (lista.size() == 0) {
+
             System.out.println("Nenhuma ficha no gaveteiro ainda.");
             return;
         }
 
-        System.out.println("--- FICHAS NO GAVETEIRO ---");
+        System.out.println("--- FICHAS NO GAVETEIRO: " + lista.size() + " ---");
 
         for (Aluno a : lista) {
+
             System.out.println(a);
         }
     }
 
-    // BUSCA REUTILIZAVEL
+    // BUSCA POR MATRICULA
     static Aluno buscarPorMatricula(ArrayList<Aluno> lista, String matricula) {
 
         for (Aluno a : lista) {
 
             if (a.getMatricula().equals(matricula)) {
+
                 return a;
             }
         }
@@ -159,13 +183,51 @@ public class Main {
     static void buscarAluno(ArrayList<Aluno> lista, Scanner teclado) {
 
         System.out.print("Digite a matricula: ");
+
         String matricula = teclado.nextLine().trim();
 
         Aluno encontrado = buscarPorMatricula(lista, matricula);
 
         if (encontrado == null) {
+
             System.out.println("Aluno nao encontrado!");
+
         } else {
+
+            System.out.println("Aluno encontrado:");
+            System.out.println(encontrado);
+        }
+    }
+
+    // BUSCA POR NOME
+    static Aluno buscarPorNome(ArrayList<Aluno> lista, String nome) {
+
+        for (Aluno a : lista) {
+
+            if (a.getNome().equalsIgnoreCase(nome)) {
+
+                return a;
+            }
+        }
+
+        return null;
+    }
+
+    // BUSCAR POR NOME PELO MENU
+    static void buscarPorNomeMenu(ArrayList<Aluno> lista, Scanner teclado) {
+
+        System.out.print("Digite o nome: ");
+
+        String nome = teclado.nextLine().trim();
+
+        Aluno encontrado = buscarPorNome(lista, nome);
+
+        if (encontrado == null) {
+
+            System.out.println("Nenhum aluno encontrado com esse nome.");
+
+        } else {
+
             System.out.println("Aluno encontrado:");
             System.out.println(encontrado);
         }
@@ -175,11 +237,13 @@ public class Main {
     static void atualizar(ArrayList<Aluno> lista, Scanner teclado) {
 
         System.out.print("Matricula do aluno que deseja atualizar: ");
+
         String matricula = teclado.nextLine().trim();
 
         Aluno encontrado = buscarPorMatricula(lista, matricula);
 
         if (encontrado == null) {
+
             System.out.println("Aluno nao encontrado!");
             return;
         }
@@ -187,38 +251,47 @@ public class Main {
         System.out.println("Aluno encontrado: " + encontrado);
 
         System.out.print("Novo nome: ");
+
         String novoNome = teclado.nextLine().trim();
 
         if (!novoNome.isEmpty()) {
+
             encontrado.setNome(novoNome);
         }
 
         System.out.print("Novo curso: ");
+
         String novoCurso = teclado.nextLine().trim();
 
         if (!novoCurso.isEmpty()) {
+
             encontrado.setCurso(novoCurso);
         }
 
         System.out.print("Novo email: ");
+
         String novoEmail = teclado.nextLine().trim();
 
         if (!novoEmail.isEmpty()) {
+
             encontrado.setEmail(novoEmail);
         }
 
         System.out.println("Ficha atualizada com sucesso!");
+        System.out.println(encontrado);
     }
 
     // REMOVER
     static void remover(ArrayList<Aluno> lista, Scanner teclado) {
 
         System.out.print("Matricula do aluno que deseja remover: ");
+
         String matricula = teclado.nextLine().trim();
 
         Aluno encontrado = buscarPorMatricula(lista, matricula);
 
         if (encontrado == null) {
+
             System.out.println("Aluno nao encontrado!");
             return;
         }
@@ -226,12 +299,17 @@ public class Main {
         System.out.println("Aluno encontrado: " + encontrado);
 
         System.out.print("Tem certeza que deseja remover? (S/N): ");
+
         String confirmacao = teclado.nextLine().trim();
 
         if (confirmacao.equalsIgnoreCase("S")) {
+
             lista.remove(encontrado);
+
             System.out.println("Ficha removida com sucesso!");
+
         } else {
+
             System.out.println("Remocao cancelada.");
         }
     }
@@ -246,6 +324,7 @@ public class Main {
         System.out.println("Total de fichas: " + lista.size());
 
         if (lista.size() == 0) {
+
             return;
         }
 
@@ -257,17 +336,26 @@ public class Main {
             int posicao = cursos.indexOf(a.getCurso());
 
             if (posicao == -1) {
+
                 cursos.add(a.getCurso());
                 quantidades.add(1);
+
             } else {
-                quantidades.set(posicao, quantidades.get(posicao) + 1);
+
+                quantidades.set(
+                    posicao,
+                    quantidades.get(posicao) + 1
+                );
             }
         }
 
         System.out.println("--- QUANTIDADE POR CURSO ---");
 
         for (int i = 0; i < cursos.size(); i++) {
-            System.out.println(cursos.get(i) + ": " + quantidades.get(i));
+
+            System.out.println(
+                cursos.get(i) + ": " + quantidades.get(i)
+            );
         }
     }
 }
