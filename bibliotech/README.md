@@ -92,4 +92,8 @@ classDiagram
     Usuario <|-- Bibliotecario
     Leitor "1" -- "0..*" Emprestimo : faz
     Livro "1" -- "0..*" Emprestimo : refere-se a
-    Bibliotecario "1" -- "0..*" Emprestimo : registra
+    Bibliotecario "1" -- "0..*" Emprestimo : registra 
+
+
+
+
