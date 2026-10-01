@@ -28,11 +28,25 @@ public class TesteBiblioteca {
             2
         );
 
+        System.out.println(
+            "Cadastra Pedro: "
+            + biblioteca.cadastrarLeitor(pedro)
+        );
+
+        System.out.println(
+            "Cadastra Ana: "
+            + biblioteca.cadastrarLeitor(ana)
+        );
+
+        System.out.println(
+            "Mesma matricula de novo: "
+            + biblioteca.cadastrarLeitor(
+                new Leitor("Outra Ana", "2026011", 2)
+            )
+        );
+
         biblioteca.cadastrarLivro(livro);
         biblioteca.cadastrarLivro(outroLivro);
-
-        biblioteca.cadastrarLeitor(pedro);
-        biblioteca.cadastrarLeitor(ana);
 
         System.out.println("--- Emprestimos ---");
 
@@ -48,12 +62,18 @@ public class TesteBiblioteca {
 
         System.out.println(
             "Pedro tenta pegar outro livro: "
-            + biblioteca.emprestar("Capitaes da Areia", "2026010")
+            + biblioteca.emprestar(
+                "Capitaes da Areia",
+                "2026010"
+            )
         );
 
         System.out.println(
             "Livro inexistente: "
-            + biblioteca.emprestar("Livro que nao existe", "2026011")
+            + biblioteca.emprestar(
+                "Livro que nao existe",
+                "2026011"
+            )
         );
 
         System.out.println(
@@ -68,11 +88,25 @@ public class TesteBiblioteca {
 
         System.out.println(
             "Ana pega Dom Casmurro: "
-            + biblioteca.emprestar("Dom Casmurro", "2026011")
+            + biblioteca.emprestar(
+                "Dom Casmurro",
+                "2026011"
+            )
+        );
+
+        System.out.println(
+            "Ana pega Capitaes da Areia: "
+            + biblioteca.emprestar(
+                "Capitaes da Areia",
+                "2026011"
+            )
         );
 
         System.out.println("--- Emprestimos ---");
         biblioteca.listarEmprestimos();
+
+        System.out.println("--- Livros com a matricula 2026011 ---");
+        biblioteca.listarLivrosDoLeitor("2026011");
 
         System.out.println("--- Acervo ---");
         biblioteca.listarAcervo();
