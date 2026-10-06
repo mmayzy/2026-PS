@@ -102,4 +102,20 @@ public class Biblioteca {
             }
         }
     }
+
+    // Fornece uma descricao do acervo para a interface.
+    public String obterAcervoComoTexto() {
+        if (livros.isEmpty()) {
+            return "Nenhum livro cadastrado.";
+        }
+
+        String texto = "";
+
+        for (int i = 0; i < livros.size(); i++) {
+            texto = texto + livros.get(i) + "\n";
+        }
+
+        return texto;
+    }
 }
+
