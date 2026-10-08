@@ -25,15 +25,15 @@ O projeto foi desenvolvido de forma iterativa e incremental, com a implementaç�
 
 ### 3.1 Requisitos funcionais
 
-| # | Requisito funcional | Veio da |
-|---|---|---|
-| RF01 | O sistema deve permitir que a bibliotecária cadastre um livro no acervo. | HU04 |
-| RF02 | O sistema deve permitir que a bibliotecária cadastre um leitor. | Regra de acesso: só quem tem cadastro leva livro |
-| RF03 | O sistema deve permitir que o leitor consulte a disponibilidade de um livro. | HU01 |
-| RF04 | O sistema deve permitir que a bibliotecária registre a devolução de um livro. | HU02 |
-| RF05 | O sistema deve permitir que a bibliotecária registre um empréstimo. | HU03 |
-| RF06 | O sistema deve listar os empréstimos atrasados. | HU05 |
-| RF07 | O sistema deve calcular a data de devolução do empréstimo. | Escopo do projeto |
+| # | Requisito funcional | Veio da | Situação |
+|---|---|---|---|
+| RF01 | O sistema deve permitir que a bibliotecária cadastre um livro no acervo. | HU04 | Implementado |
+| RF02 | O sistema deve permitir que a bibliotecária cadastre um leitor. | Regra de acesso: só quem tem cadastro leva livro | Implementado |
+| RF03 | O sistema deve permitir que o leitor consulte a disponibilidade de um livro. | HU01 | Implementado |
+| RF04 | O sistema deve permitir que a bibliotecária registre a devolução de um livro. | HU02 | Implementado |
+| RF05 | O sistema deve permitir que a bibliotecária registre um empréstimo. | HU03 | Implementado |
+| RF06 | O sistema deve listar os empréstimos atrasados. | HU05 | Ainda não implementado |
+| RF07 | O sistema deve calcular a data de devolução do empréstimo. | Escopo do projeto | Implementado |
 
 ### 3.2 Requisitos não funcionais
 
@@ -81,7 +81,7 @@ classDiagram
 | `Usuario.java` | Classe base dos usuários do sistema. |
 | `Leitor.java` | Representa os leitores e controla a quantidade de livros que possuem emprestados. |
 | `Bibliotecario.java` | Representa o bibliotecário do sistema. |
-| `Emprestimo.java` | Representa um empréstimo e controla sua realização e devolução. |
+| `Emprestimo.java` | Representa um empréstimo, controla sua realização, devolução e calcula a data prevista de devolução. |
 | `Biblioteca.java` | Mantém os livros, leitores e empréstimos e coordena as operações do sistema. |
 | `TelaBiblioteca.java` | Interface gráfica do sistema. |
 | `TesteEmprestimo.java` | Realiza testes das operações de empréstimo e devolução. |
@@ -120,7 +120,7 @@ java TesteRequisitos
 
 O teste verifica automaticamente os requisitos funcionais RF01, RF02, RF03, RF04 e RF05.
 
-O resultado esperado é:
+O resultado atual é:
 
 ~~~text
 12 passaram, 0 falharam.
@@ -146,7 +146,7 @@ A interface gráfica permite realizar empréstimos e devoluções e atualizar a 
 | RF04 | HU02 | `Biblioteca` / `Emprestimo` | `TesteRequisitos` |
 | RF05 | HU03 | `Biblioteca` / `Emprestimo` | `TesteRequisitos` |
 | RF06 | HU05 | Ainda não implementado | Ainda não verificado |
-| RF07 | Escopo do projeto | Ainda não implementado | Ainda não verificado |
+| RF07 | Escopo do projeto | `Emprestimo` | Data prevista calculada para 7 dias |
 
 ## 8. Verificação dos requisitos
 
@@ -159,6 +159,7 @@ O arquivo `TesteRequisitos.java` realiza verificações automáticas dos requisi
 | RF03 | Verifica se um livro novo está disponível e se um título inexistente não é encontrado. |
 | RF04 | Verifica se uma devolução de empréstimo ativo é aceita, se o livro volta a ficar disponível e se uma segunda devolução é recusada. |
 | RF05 | Verifica se um empréstimo de livro disponível é aceito, se o livro fica indisponível, se o leitor passa a ter um livro em mãos e se empréstimos que não podem ser realizados são recusados. |
+| RF07 | O `Emprestimo` calcula a data prevista de devolução como 7 dias após a data de retirada. |
 
 ### Resultado da verificação
 
@@ -177,9 +178,11 @@ Nesta etapa, o sistema ainda não implementa todas as funcionalidades previstas 
 | Consulta de disponibilidade | Implementado |
 | Registro de empréstimos | Implementado |
 | Registro de devoluções | Implementado |
+| Cálculo da data prevista de devolução em 7 dias | Implementado |
 | Listagem de empréstimos atrasados | Ainda não implementado |
-| Cálculo da data de devolução | Ainda não implementado |
 | Reserva de livros | Ainda não implementado |
+| Persistência dos dados em banco de dados | Ainda não implementado |
+| Sistema de login e autenticação de usuários | Ainda não implementado |
 
 As funcionalidades que ainda não foram implementadas ficam registradas para possíveis evoluções futuras do sistema.
 

@@ -5,6 +5,7 @@ public class Emprestimo {
     private Leitor leitor;
     private LocalDate dataRetirada;
     private LocalDate dataDevolucao;
+    private LocalDate dataPrevistaDevolucao;
     private boolean ativo;
 
     public Emprestimo(Livro livro, Leitor leitor) {
@@ -28,6 +29,10 @@ public class Emprestimo {
         livro.emprestar();
         leitor.pegouLivro();
         dataRetirada = LocalDate.now();
+
+        // O prazo de devolucao e de 7 dias apos a retirada.
+        dataPrevistaDevolucao = dataRetirada.plusDays(7);
+
         dataDevolucao = null;
         ativo = true;
         return true;
@@ -61,6 +66,10 @@ public class Emprestimo {
         return dataDevolucao;
     }
 
+    public LocalDate getDataPrevistaDevolucao() {
+        return dataPrevistaDevolucao;
+    }
+
     public boolean estaAtivo() {
         return ativo;
     }
@@ -79,6 +88,7 @@ public class Emprestimo {
         return livro.getTitulo() + " para "
              + leitor.getNome()
              + " | retirada: " + dataRetirada
+             + " | devolucao prevista: " + dataPrevistaDevolucao
              + " | " + situacao;
     }
 }

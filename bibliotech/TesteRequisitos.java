@@ -1,10 +1,10 @@
+import java.time.LocalDate;
+
 public class TesteRequisitos {
 
-    // Dois contadores da classe: somam o resultado de todas as verificacoes.
     private static int passaram = 0;
     private static int falharam = 0;
 
-    // Confere uma condicao. Quem compara e o programa, nao os seus olhos.
     private static void verificar(String requisito, boolean condicao) {
         if (condicao) {
             passaram += 1;
@@ -37,7 +37,6 @@ public class TesteRequisitos {
         Livro dom = biblioteca.buscarLivro("Dom Casmurro");
         Leitor pedro = biblioteca.buscarLeitor("2026010");
 
-        // RF01 e RF02: o que foi cadastrado pode ser encontrado.
         verificar(
                 "RF01 livro cadastrado aparece na busca",
                 dom != null
@@ -48,7 +47,6 @@ public class TesteRequisitos {
                 pedro != null
         );
 
-        // RF03: consultar a disponibilidade.
         verificar(
                 "RF03 livro novo esta disponivel",
                 dom.estaDisponivel()
@@ -59,7 +57,6 @@ public class TesteRequisitos {
                 biblioteca.buscarLivro("O Cortico") == null
         );
 
-        // RF05: registrar o emprestimo e recusar o que nao pode.
         verificar(
                 "RF05 emprestimo de livro disponivel e aceito",
                 biblioteca.emprestar("Dom Casmurro", "2026010")
@@ -85,7 +82,6 @@ public class TesteRequisitos {
                 !biblioteca.emprestar("Capitaes da Areia", "2026010")
         );
 
-        // RF04: registrar a devolucao e recusar uma segunda devolucao.
         verificar(
                 "RF04 devolucao de emprestimo ativo e aceita",
                 biblioteca.devolver("Dom Casmurro")
