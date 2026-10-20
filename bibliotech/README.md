@@ -181,7 +181,7 @@ Nesta etapa, o sistema ainda não implementa todas as funcionalidades previstas 
 | Cálculo da data prevista de devolução em 7 dias | Implementado |
 | Listagem de empréstimos atrasados | Ainda não implementado |
 | Reserva de livros | Ainda não implementado |
-| Persistência dos dados em banco de dados | Ainda não implementado |
+| Persistência dos dados em banco de dados |implementado parcialmente |
 | Sistema de login e autenticação de usuários | Ainda não implementado |
 
 As funcionalidades que ainda não foram implementadas ficam registradas para possíveis evoluções futuras do sistema.
@@ -197,3 +197,45 @@ As funcionalidades que ainda não foram implementadas ficam registradas para pos
 | GitHub | Armazenamento e entrega do repositório. |
 | draw.io | Criação dos diagramas do sistema. |
 | ChatGPT | Apoio na organização das verificações dos requisitos, esclarecimento de dúvidas sobre a implementação e documentação do projeto. |
+
+## 11. Persistência de dados
+
+Nesta etapa, o BiblioTech passou a utilizar um banco de dados relacional para armazenar os livros cadastrados. A conexão é feita por JDBC, utilizando o driver MariaDB Connector/J.
+
+### 11.1 Banco de dados
+
+O banco utilizado chama-se `bibliotech` e contém a tabela `livros`, com os campos:
+
+| Campo | Descrição |
+|---|---|
+| `id` | Identificador do livro, gerado automaticamente |
+| `titulo` | Título do livro |
+| `autor` | Nome do autor |
+| `ano` | Ano de publicação |
+
+### 11.2 Arquivos da persistência
+
+| Arquivo | Função |
+|---|---|
+| `Conexao.java` | Abre a conexão com o banco usando JDBC e variáveis de ambiente para as credenciais. |
+| `TesteConexao.java` | Verifica se a conexão com o banco funciona. |
+| `LivroDAO.java` | Implementa as operações de inserção, atualização e exclusão de livros. |
+| `TesteLivroDAO.java` | Testa as operações de persistência. |
+
+### 11.3 Segurança das credenciais
+
+O usuário e a senha do banco são configurados pelas variáveis de ambiente `DB_USER` e `DB_PASSWORD`. As credenciais não devem ser registradas no código-fonte nem publicadas no repositório.
+
+### 11.4 Como compilar e testar
+
+Com o servidor do banco iniciado e as variáveis de ambiente configuradas, execute na pasta `bibliotech`:
+
+```bash
+javac -cp ".:lib/*" Conexao.java TesteConexao.java LivroDAO.java TesteLivroDAO.java
+java -cp ".:lib/*" TesteConexao
+java -cp ".:lib/*" TesteLivroDAO
+
+### 11.5 Resultado do desafio
+O desafio prático foi executado com sucesso: o livro O Pequeno Principe foi cadastrado, outro livro foi inserido, o título do primeiro foi atualizado para O Pequeno Principe - Edicao Revisada e o segundo registro foi excluído. As operações retornaram true.
+
+O sistema ainda possui funcionalidades que podem ser desenvolvidas em etapas futuras, como a persistência de leitores e empréstimos, a listagem de empréstimos atrasados e a reserva de livros.
