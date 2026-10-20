@@ -29,7 +29,7 @@ public class TesteLivroDAO {
         String tituloAtualizado = "Livro de Teste BiblioTech Atualizado";
 
         try {
-            // Limpa registros de execucoes anteriores do mesmo teste.
+            // Limpa registros de testes anteriores.
             int idAnterior = buscarId(tituloTeste);
             if (idAnterior != -1) {
                 dao.excluirLivro(idAnterior);
@@ -40,6 +40,7 @@ public class TesteLivroDAO {
                 dao.excluirLivro(idAtualizadoAnterior);
             }
 
+            // Teste de inserção.
             boolean adicionado = dao.adicionarLivro(
                 tituloTeste,
                 "Autor de Teste",
@@ -47,6 +48,7 @@ public class TesteLivroDAO {
             );
             System.out.println("Adicionar livro: " + adicionado);
 
+            // Teste de atualização.
             int idLivro = buscarId(tituloTeste);
 
             boolean atualizado = idLivro != -1
@@ -56,14 +58,36 @@ public class TesteLivroDAO {
                     "Autor de Teste",
                     2026
                 );
+
             System.out.println("Atualizar livro: " + atualizado);
 
+            // Teste de exclusão.
             int idAtualizado = buscarId(tituloAtualizado);
 
             boolean excluido = idAtualizado != -1
                 && dao.excluirLivro(idAtualizado);
+
             System.out.println("Excluir livro: " + excluido);
 
+            // Teste adicional: identificador inexistente.
+            boolean atualizouInexistente = dao.atualizarLivro(
+                999999,
+                "Livro Inexistente",
+                "Autor Desconhecido",
+                2026
+            );
+
+            boolean excluiuInexistente = dao.excluirLivro(999999);
+
+            System.out.println(
+                "Atualizacao de inexistente: " + atualizouInexistente
+            );
+
+            System.out.println(
+                "Exclusao de inexistente: " + excluiuInexistente
+            );
+
+            // Consulta dos livros que continuam no banco.
             System.out.println("\nLivros restantes:");
 
             try (Connection conexao = Conexao.conectar();
