@@ -46,6 +46,7 @@ public class TesteLivroDAO {
                 "Autor de Teste",
                 2026
             );
+
             System.out.println("Adicionar livro: " + adicionado);
 
             // Teste de atualização.
@@ -69,7 +70,7 @@ public class TesteLivroDAO {
 
             System.out.println("Excluir livro: " + excluido);
 
-            // Teste adicional: identificador inexistente.
+            // Testes com identificador inexistente.
             boolean atualizouInexistente = dao.atualizarLivro(
                 999999,
                 "Livro Inexistente",
@@ -87,26 +88,37 @@ public class TesteLivroDAO {
                 "Exclusao de inexistente: " + excluiuInexistente
             );
 
-            // Consulta dos livros que continuam no banco.
-            System.out.println("\nLivros restantes:");
+            // Teste de listarLivros().
+            System.out.println("\nTeste de listarLivros():");
 
-            try (Connection conexao = Conexao.conectar();
-                 PreparedStatement stmt = conexao.prepareStatement(
-                     "SELECT * FROM livros");
-                 ResultSet rs = stmt.executeQuery()) {
-
-                while (rs.next()) {
-                    System.out.println(
-                        rs.getInt("id") + " - " +
-                        rs.getString("titulo") + " - " +
-                        rs.getString("autor") + " - " +
-                        rs.getInt("ano")
-                    );
-                }
+            for (Livro livro : dao.listarLivros()) {
+                System.out.println(livro);
             }
+
+            // Teste de buscarLivroPorId().
+            int idConsulta = 4;
+
+            if (idConsulta != -1) {
+                Livro livroEncontrado = dao.buscarLivroPorId(idConsulta);
+
+                System.out.println("\nTeste de buscarLivroPorId():");
+                System.out.println(livroEncontrado);
+            } else {
+                System.out.println(
+                    "\nDom Casmurro não encontrado; teste por ID não executado."
+                );
+            }
+
+            // Teste de busca por identificador inexistente.
+            Livro inexistente = dao.buscarLivroPorId(999999);
+
+            System.out.println(
+                "\nBusca por ID inexistente: " + inexistente
+            );
 
         } catch (Exception e) {
             System.out.println("Erro no teste: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
