@@ -1,11 +1,12 @@
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.*;
 
 public class TelaBiblioteca extends JFrame {
+
     private Biblioteca biblioteca;
+
     private JTextField campoTitulo;
     private JTextField campoMatricula;
     private JTextArea areaAcervo;
@@ -14,7 +15,7 @@ public class TelaBiblioteca extends JFrame {
         this.biblioteca = biblioteca;
 
         setTitle("BiblioTech");
-        setSize(760, 480);
+        setSize(850, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
@@ -27,16 +28,18 @@ public class TelaBiblioteca extends JFrame {
         campoTitulo = new JTextField();
         campoMatricula = new JTextField();
 
-        campos.add(new JLabel("Titulo do livro:"));
+        campos.add(new JLabel("Título do livro:"));
         campos.add(campoTitulo);
-        campos.add(new JLabel("Matricula do leitor:"));
+        campos.add(new JLabel("Matrícula do leitor:"));
         campos.add(campoMatricula);
+
         add(campos, BorderLayout.NORTH);
 
         areaAcervo = new JTextArea();
         areaAcervo.setEditable(false);
         areaAcervo.setLineWrap(true);
         areaAcervo.setWrapStyleWord(true);
+
         add(new JScrollPane(areaAcervo), BorderLayout.CENTER);
 
         JPanel botoes = new JPanel(new FlowLayout());
@@ -44,15 +47,22 @@ public class TelaBiblioteca extends JFrame {
         JButton botaoEmprestar = new JButton("Emprestar");
         JButton botaoDevolver = new JButton("Devolver");
         JButton botaoAtualizar = new JButton("Atualizar acervo");
+        JButton botaoConsultar = new JButton("Consultar livros");
 
         botoes.add(botaoEmprestar);
         botoes.add(botaoDevolver);
         botoes.add(botaoAtualizar);
+        botoes.add(botaoConsultar);
+
         add(botoes, BorderLayout.SOUTH);
 
         botaoEmprestar.addActionListener(e -> emprestar());
         botaoDevolver.addActionListener(e -> devolver());
         botaoAtualizar.addActionListener(e -> atualizarAcervo());
+
+        botaoConsultar.addActionListener(e -> {
+            new TelaLivros().setVisible(true);
+        });
 
         atualizarAcervo();
     }
@@ -69,7 +79,7 @@ public class TelaBiblioteca extends JFrame {
         if (titulo.isEmpty() || matricula.isEmpty()) {
             JOptionPane.showMessageDialog(
                 this,
-                "Preencha o titulo e a matricula."
+                "Preencha o título e a matrícula."
             );
             return;
         }
@@ -80,12 +90,12 @@ public class TelaBiblioteca extends JFrame {
         if (resultado) {
             JOptionPane.showMessageDialog(
                 this,
-                "Emprestimo realizado."
+                "Empréstimo realizado."
             );
         } else {
             JOptionPane.showMessageDialog(
                 this,
-                "Emprestimo recusado. Confira o titulo, a matricula, "
+                "Empréstimo recusado. Confira o título, a matrícula, "
                 + "a disponibilidade e o limite do leitor."
             );
         }
@@ -97,7 +107,7 @@ public class TelaBiblioteca extends JFrame {
         if (titulo.isEmpty()) {
             JOptionPane.showMessageDialog(
                 this,
-                "Preencha o titulo do livro."
+                "Preencha o título do livro."
             );
             return;
         }
@@ -108,17 +118,18 @@ public class TelaBiblioteca extends JFrame {
         if (resultado) {
             JOptionPane.showMessageDialog(
                 this,
-                "Devolucao registrada."
+                "Devolução registrada."
             );
         } else {
             JOptionPane.showMessageDialog(
                 this,
-                "Nenhum emprestimo ativo encontrado para esse titulo."
+                "Nenhum empréstimo ativo encontrado para esse título."
             );
         }
     }
 
     public static void main(String[] args) {
+
         Biblioteca biblioteca = new Biblioteca();
 
         biblioteca.cadastrarLivro(
@@ -126,7 +137,7 @@ public class TelaBiblioteca extends JFrame {
         );
 
         biblioteca.cadastrarLivro(
-            new Livro("Capitaes da Areia", "Jorge Amado", 1937)
+            new Livro("Capitães da Areia", "Jorge Amado", 1937)
         );
 
         biblioteca.cadastrarLeitor(
